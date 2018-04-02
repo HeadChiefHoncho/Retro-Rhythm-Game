@@ -5,11 +5,11 @@ using UnityEngine;
 public class MicInput : MonoBehaviour {
 
     AudioClip micInput;
-    public float cheeseTH = 0.14f;
-    public float controllerTH = 0.04f;
+    public float aboveTH = 0.14f;
+    public float belowTH = 0.04f;
     public bool activated = false;
-    GameObject cheese;
-    GameObject controller;
+    GameObject player;
+    Animator playerAnim;
     int numSamples;
     float avgLevel;
     float lastActivateTime;
@@ -19,8 +19,8 @@ public class MicInput : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        cheese = GameObject.Find("cheese sprite");
-        controller = GameObject.Find("controller sprite");
+        player = GameObject.Find("player");
+        playerAnim = player.GetComponent<Animator>();
         if (Microphone.devices.Length > 0)
         {
             micInput = Microphone.Start(Microphone.devices[0], true, 999, 44100);
@@ -60,37 +60,30 @@ public class MicInput : MonoBehaviour {
             avgLevel += level / numSamples;
         }
 
-        if (level > (cheeseTH + avgLevel) && !activated && (Time.time - lastActivateTime) > cooldown)
+        if (level > (aboveTH + avgLevel) && !activated && (Time.time - lastActivateTime) > cooldown)
         {
+            // Loud noise detected
             lastActivateTime = Time.time;
             Debug.Log(level);
-            if (cheese.transform.position.y == 0)
-            {
-                cheese.transform.Translate(new Vector3(0, 1, 0));
-            } else
-            {
-                cheese.transform.Translate(new Vector3(0, -1, 0));
-            }
+
+            playerAnim.SetTrigger("upbeat");
+
             activated = true;
         }
-        if (level <= (cheeseTH + avgLevel - controllerRange) && level > (controllerTH + avgLevel)
+        if (level <= (aboveTH + avgLevel - controllerRange) && level > (belowTH + avgLevel)
             && !activated && (Time.time - lastActivateTime) > cooldown)
         {
+            // Low noise detected
             lastActivateTime = Time.time;
-            //Debug.Log("Waaaa no noise");
             Debug.Log(level);
-            if (controller.transform.position.y == 0)
-            {
-                controller.transform.Translate(new Vector3(0, 1, 0));
-            }
-            else
-            {
-                controller.transform.Translate(new Vector3(0, -1, 0));
-            }
+
+            playerAnim.SetTrigger("downbeat");
+
             activated = true;
         }
-        if (level <= (controllerTH + avgLevel) && activated)
+        if (level <= (belowTH + avgLevel) && activated)
         {
+            // No noise detected
             activated = false;
         }
 	}
