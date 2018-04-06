@@ -15,9 +15,12 @@ public class BeatHandler : MonoBehaviour {
     float lastBeat;
     public float cooldown = 0.1f;
     bool needsBeat = true;
+    PauseButtonHandler pauseButton;
 
     // Use this for initialization
     void Start () {
+        pauseButton = GameObject.Find("Canvas").GetComponent<PauseButtonHandler>();
+
         //Select the instance of AudioProcessor and pass a reference
         //to this object
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
@@ -33,25 +36,26 @@ public class BeatHandler : MonoBehaviour {
         belowEnd = GameObject.Find("below end");
 
         // set end obstacles for colliding and deleting to be same as originals
-        aboveEnd.transform.position = new Vector3(-aboveOrig.x, aboveOrig.y, 0);
-        belowEnd.transform.position = new Vector3(-belowOrig.x, belowOrig.y, 0);
+        aboveEnd.transform.position = new Vector3(-aboveOrig.x - 3, aboveOrig.y, 0);
+        belowEnd.transform.position = new Vector3(-belowOrig.x - 3, belowOrig.y, 0);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+    }
 
     //this event will be called every time a beat is detected.
     //Change the threshold parameter in the inspector
     //to adjust the sensitivity
     void onOnbeatDetected()
     {
+        
         if (!needsBeat && ((Time.time - cooldown) >= lastBeat))
         {
             needsBeat = true;
         }
-        if (needsBeat)
+        if (needsBeat && !pauseButton.pause)
         {
             lastBeat = Time.time;
             needsBeat = false;
