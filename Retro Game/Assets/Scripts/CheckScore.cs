@@ -27,18 +27,26 @@ public class CheckScore : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collider)
     {
         GameObject contactObject = collider.gameObject;
-        float distance = Mathf.Abs(transform.position.x - contactObject.transform.position.x);
-        if (distance <= perfectRange)
+        bool hitBefore = contactObject.GetComponent<Hit>().hasBeenHit;
+        if (!hitBefore)
         {
-            scoretally.perfectScore();
-            perfectAnimator.SetTrigger("perfect");
-        } else if (distance <= goodRange)
-        {
-            scoretally.goodScore();
-            goodAnimator.SetTrigger("good");
-        } else
-        {
-            badAnimator.SetTrigger("bad");
+            float distance = Mathf.Abs(transform.position.x - contactObject.transform.position.x);
+            if (distance <= perfectRange)
+            {
+                scoretally.perfectScore();
+                perfectAnimator.SetTrigger("perfect");
+            }
+            else if (distance <= goodRange)
+            {
+                scoretally.goodScore();
+                goodAnimator.SetTrigger("good");
+            }
+            else
+            {
+                badAnimator.SetTrigger("bad");
+            }
+            contactObject.GetComponent<Hit>().hasBeenHit = true;
         }
+        
     }
 }

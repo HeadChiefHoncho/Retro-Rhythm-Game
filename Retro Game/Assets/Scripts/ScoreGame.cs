@@ -16,10 +16,12 @@ public class ScoreGame : MonoBehaviour {
     PauseButtonHandler pauseButton;
     float timeDone = 0f;
     public float minTimeDone = 2f;
+    private MultipleAudio multipleAudio;
 
 
     // Use this for initialization
     void Start () {
+        multipleAudio = GameObject.Find("player").GetComponent<MultipleAudio>();
         pauseButton = GameObject.Find("Canvas").GetComponent<PauseButtonHandler>();
         audioSource = GameObject.Find("player").GetComponent<AudioSource>();
         scoreTally = GameObject.Find("Canvas/Score Panel/Score Text").GetComponent<ScoreTally>();
@@ -30,7 +32,7 @@ public class ScoreGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (audioSource.isPlaying)
+        if (!audioSource.isPlaying || !multipleAudio.trackSelected)
         {
             timeDone = Time.time;
         }

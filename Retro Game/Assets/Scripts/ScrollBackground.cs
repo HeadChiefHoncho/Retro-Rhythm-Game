@@ -6,7 +6,7 @@ public class ScrollBackground : MonoBehaviour {
 
     Vector3 nextBackgroundOrig;
 
-    public Vector2 obstacleSpeed = new Vector2(-4, 0); // based on tiles on screen
+    public Vector2 obstacleSpeed; // based on tiles on screen
 
     GameObject background;
     GameObject nextBackground;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseObject : MonoBehaviour {
 
-    public Vector2 obstacleSpeed = new Vector2(-4, 0);
+    public Vector2 obstacleSpeed;
     PauseButtonHandler pauseButton;
 
     // Use this for initialization

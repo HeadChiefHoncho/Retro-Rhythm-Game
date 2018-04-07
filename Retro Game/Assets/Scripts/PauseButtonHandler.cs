@@ -14,13 +14,16 @@ public class PauseButtonHandler : MonoBehaviour {
     public GameObject canvas;
     public bool pause = false;
     DelayAudio delayAudio;
+    public MultipleAudio multipleAudio;
+    public MicInput micInput;
+    public MultipleAudio[] audioSource;
+    public AudioSource music;
 
     // Use this for initialization
     void Start()
     {
 
         canvas = GameObject.Find("Canvas");
-        delayAudio = GameObject.Find("player").GetComponent<DelayAudio>();
         pausePanel = canvas.transform.GetChild(2).gameObject;
         pausePanel.SetActive(false);
 
@@ -38,22 +41,31 @@ public class PauseButtonHandler : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        if (multipleAudio.trackSelected && micInput.startedGame)
+        {
+            delayAudio = GameObject.Find("player").GetComponent<DelayAudio>();
+        }
     }
 
     void StartGame()
     {
+        micInput.startedGame = false;
+        audioSource[0].trackSelected = false;
+        audioSource[1].trackSelected = false;
         SceneManager.LoadScene("game");
     }
 
     void ExitGame()
     {
+        micInput.startedGame = false;
+        audioSource[0].trackSelected = false;
+        audioSource[1].trackSelected = false;
         SceneManager.LoadScene("menu");
     }
 
     void OpenPause()
     {
-        if (delayAudio.delayDone)
+        if (micInput.startedGame && delayAudio.delayDone && music.isPlaying)
         {
             pausePanel = canvas.transform.GetChild(2).gameObject;
             pausePanel.SetActive(true);

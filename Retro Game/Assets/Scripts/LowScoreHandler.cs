@@ -10,6 +10,8 @@ public class LowScoreHandler : MonoBehaviour {
     public Button mainMenu;
     public GameObject lowScorePanel;
     public GameObject canvas;
+    public MicInput micInput;
+    public MultipleAudio[] audioSource;
 
     // Use this for initialization
     void Start () {
@@ -31,11 +33,17 @@ public class LowScoreHandler : MonoBehaviour {
 
     void StartGame()
     {
+        micInput.startedGame = false;
+        audioSource[0].trackSelected = false;
+        audioSource[1].trackSelected = false;
         SceneManager.LoadScene("game");
     }
 
     void ExitGame()
     {
+        micInput.startedGame = false;
+        audioSource[0].trackSelected = false;
+        audioSource[1].trackSelected = false;
         SceneManager.LoadScene("menu");
     }
 }
