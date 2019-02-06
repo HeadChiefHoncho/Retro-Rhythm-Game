@@ -38,7 +38,7 @@ public class SongSelectButtonHandler : MonoBehaviour {
 
         canvas = GameObject.Find("Canvas");
         songSelectPanel = canvas.transform.GetChild(5).gameObject;
-        songSelectPanel.SetActive(true);
+        songSelectPanel.SetActive(false);
 
         Button s1 = song1.GetComponent<Button>();
         Button s2 = song2.GetComponent<Button>();

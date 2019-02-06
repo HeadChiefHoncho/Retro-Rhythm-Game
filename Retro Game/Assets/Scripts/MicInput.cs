@@ -5,8 +5,11 @@ using UnityEngine;
 public class MicInput : MonoBehaviour {
 
     AudioClip micInput;
+
+    // VOLUME THRESHOLDS (these will be set during mic calibration)
     public float aboveTH = 0.35f;
     public float belowTH = 0.1f;
+
     public bool activated = false;
     GameObject player;
     Animator playerAnim;
@@ -40,7 +43,7 @@ public class MicInput : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!startedGame && multipleAudio[1].trackSelected)
+        if (!startedGame && multipleAudio[1].trackSelected) // ADD CONDITION FOR MIC CALIBRATION BEING COMPLETE
         {
             player = GameObject.Find("Player Container/player");
             playerAnim = player.GetComponent<Animator>();
@@ -74,9 +77,11 @@ public class MicInput : MonoBehaviour {
                 }
             }
 
-
+            // MIC VOLUME LEVEL
             float level = Mathf.Sqrt(Mathf.Sqrt(levelMax));
 
+
+            // CALIBRATE AVG SILENT VOLUME
             if (Time.time <= calibrateSeconds)
             {
                 numSamples++;
@@ -84,6 +89,11 @@ public class MicInput : MonoBehaviour {
                 avgLevel += level / numSamples;
             }
 
+
+            // Below should be once game has begun
+            // Also need mic callibration step in between picking song and starting game
+
+            // VOLUME ANALYSIS
             if (level > (aboveTH + avgLevel) && !activated && (Time.time - lastActivateTime) > cooldown)
             {
                 // Loud noise detected

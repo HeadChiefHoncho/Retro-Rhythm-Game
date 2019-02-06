@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DelayAudio : MonoBehaviour {
 
-    AudioSource music;
+    //AudioSource music;
     public float delay = 8.0f; // based on speed of obstacles & tiles on screen
     public bool delayDone = false;
     private float startTime;
@@ -15,7 +15,7 @@ public class DelayAudio : MonoBehaviour {
 	void Start () {
         audioSource = GetComponent<MultipleAudio>();
         startTime = Time.time;
-        music = GetComponent<AudioSource>();
+        //music = GetComponent<AudioSource>();
         
 
 	}
