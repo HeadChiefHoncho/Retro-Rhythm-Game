@@ -1,5 +1,7 @@
 # Radical Rhythm Redemption
 
+![alt text](https://media.giphy.com/media/AFJNNAQzpKCttbZ5P3/giphy.gif)
+
 Radical Rhythm Redemption was conceived as a project in response to the prompt "retro game with unconventional controls" for my Game Design class. Rather than using a traditonal keyboard/mouse or console controller, the player must use a microphone to provide input to this 80's inspired rhythm game.
 
 I worked with Justina Ampofo and Evan Brook to design and implement this game, working as the sole programmer.
