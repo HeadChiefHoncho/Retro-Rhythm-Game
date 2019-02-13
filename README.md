@@ -22,3 +22,5 @@ For Mac players, the game executable is listed under the "Retro Game.app/Content
 # Things We Didn't Get To
 
 As with many games created for school projects, we didn't necessarily have the timeline that would have benefitted this game. We had many ideas for adding a high score table, uploading your own songs to play with, and further enhancements to the controls. As a fledgling project by college students just getting into game design, however, I think it turned out pretty well and greatly enjoyed working on it.
+
+Here is a clip of my initial experimentation with the microphone as a controller: https://www.youtube.com/watch?v=y8P1qHJSW5o
