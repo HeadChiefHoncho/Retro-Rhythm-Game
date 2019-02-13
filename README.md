@@ -13,6 +13,7 @@ To play, download the repository and then, based on your operating system, do on
 (Please note that for all operating systems the game requires a microphone to play, and since there is in-game audio, you're best off with a headphones/microphone combo of some sort)
 
 For Windows players, the game executable is listed under the "Retro Game" directory.
+
 For Mac players, the game executable is listed under the "Retro Game.app/Contents/MacOS" directory.
 
 
