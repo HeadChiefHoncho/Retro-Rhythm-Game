@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class implements the song selection panel and changes
+ * tracks in the MultipleAudio script accordingly.
+ */
+
 public class SongSelectButtonHandler : MonoBehaviour {
 
     // Song Buttons

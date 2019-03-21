@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/**
+ * This class implements the microphone calibration series of
+ * instructions before the player begins the game. Actual
+ * calibration logic can be found in the MicInput class.
+ */
+
 public class CalibrationButtonHandler : MonoBehaviour {
  
     // UI Panels
@@ -28,6 +34,7 @@ public class CalibrationButtonHandler : MonoBehaviour {
     public GameObject done;
     public GameObject contin;
 
+    // Misc
     public bool calibrating = false;
     public bool calibrationSet = false; // set to true once calibration is complete
     private float timeRemaining = 3;

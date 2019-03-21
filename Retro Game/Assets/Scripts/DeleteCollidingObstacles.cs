@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeleteCollidingObstacles : MonoBehaviour {
+/** 
+ * This class allows the scrolling obstacles to be deleted when they
+ * collide with their counterparts to the left of the edge of the screen.
+ * It is an easy way to handle the rotation of assets in the scene.
+ */
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class DeleteCollidingObstacles : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collider)
     {

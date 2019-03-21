@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/** 
+ * This class implements the scoreboard, accessible through
+ * the main menu. It pulls the most recent high scores each
+ * time the scoreboard is brought up.
+ */
+
 public class ScoreboardHandler : MonoBehaviour {
 
     // PlayerPrefs constants
@@ -55,9 +61,6 @@ public class ScoreboardHandler : MonoBehaviour {
         hsText2.text = hs_text_2;
         hsText3.text = hs_text_3;
 
-        // TODO: make button handlers for scoreboard work
-        //       make sure that the scoreboard is populated w/ the correct scores
-        //       edit the ScoreGame file to make sure that a new high score is not ALWAYS being added (which it is right now for testing) 
     }
 
     void EnterScoreboard()

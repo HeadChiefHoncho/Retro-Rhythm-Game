@@ -2,45 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class detects microphone volume levels and moves
+ * the player circle accordingly. It also calculates the
+ * microphone average levels (calibration).
+ */
+
 public class MicInput : MonoBehaviour {
 
-    AudioClip micInput;
-
-    // VOLUME THRESHOLDS (these will be set during mic calibration)
+    // Initial Volume Thresholds and Constants
     public float aboveTH = 0.35f;
     public float belowTH = 0.1f;
-
-    public float cooldown = 0.095f;
+    public float cooldown = 0.1f;
     public float controllerRange = 0.06f;
-
     public bool activated = false;
+    public bool startedGame = false;
+    
+    // Game Objects
     GameObject player;
     Animator playerAnim;
+    AudioClip micInput;
+
+    // Script References
+    public MultipleAudio[] multipleAudio;
+    public DelayAudio delayAudio;
+    PauseButtonHandler pauseButton;
+    CalibrationButtonHandler calibrationHandler;
+    ScoreGame scoreGame;
+
+    // Misc
     int numSamples;
     float avgLevel;
     float lastActivateTime;
-    
-    PauseButtonHandler pauseButton;
-    CalibrationButtonHandler calibrationHandler;
-    public MultipleAudio[] multipleAudio;
-    public bool startedGame = false;
-    public DelayAudio delayAudio;
-    ScoreGame scoreGame;
 
-    // Use this for initialization
+
     void Start () {
+        // GameObject and Script Instance Init
         pauseButton = GameObject.Find("Canvas").GetComponent<PauseButtonHandler>();
         calibrationHandler = GameObject.Find("Canvas").GetComponent<CalibrationButtonHandler>();
         multipleAudio[1] = GameObject.Find("Main Camera").GetComponent<MultipleAudio>();
         scoreGame = GameObject.Find("Player Container").transform.GetChild(0).GetComponent<ScoreGame>();
+
+        // Check for user microphone
         if (Microphone.devices.Length > 0)
         {
             micInput = Microphone.Start(Microphone.devices[0], true, 999, 44100);
         }
         else
         {
-            // do error handling here
-            Debug.Log("NO MIC WOOPSIE");
+            Debug.Log("Please connect a microphone to play!");
+            Application.Quit();
         }
     }
 	

@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class implements the pause functionality for moving obstacles.
+ * When the game is paused, this class will detect that and ensure that
+ * the scrolling game obstacles do not continue to move in the background.
+ */
+
 public class PauseObject : MonoBehaviour {
 
-    public Vector2 obstacleSpeed;
+    Vector2 obstacleSpeed = new Vector2(-4, 0);
     PauseButtonHandler pauseButton;
-    ScoreGame scoreGame;
 
-    // Use this for initialization
+    // Init
     void Start () {
         pauseButton = GameObject.Find("Canvas").GetComponent<PauseButtonHandler>();
-        scoreGame = GameObject.Find("Player Container").transform.GetChild(0).GetComponent<ScoreGame>();
     }
 	
-	// Update is called once per frame
 	void Update () {
 		if (!pauseButton.pause && name != "above" && name != "below")
         {
             GetComponent<Rigidbody2D>().velocity = obstacleSpeed;
-        } else if (scoreGame.gameOver && name != "above" && name != "below")
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
-        } else
+        }
+        else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
         }

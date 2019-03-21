@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class handles the background continuously scrolling
+ * behind the gameplay.
+ */
+
 public class ScrollBackground : MonoBehaviour {
 
     Vector3 nextBackgroundOrig;
-
-    public Vector2 obstacleSpeed; // based on tiles on screen
+    Vector2 obstacleSpeed = new Vector2(-.2f, 0);
 
     GameObject background;
     GameObject nextBackground;

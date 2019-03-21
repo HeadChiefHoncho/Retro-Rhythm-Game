@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class handles the implementation of the high score panel.
+ * When a player attains a new high score, they are prompted to 
+ * enter a name underneath their score number. They then "submit"
+ * their name, and it will appear on the main menu Scoreboard.
+ * 
+ * The information is also persistent, making use of PlayerPrefs
+ * to save the high scores for a player's instance of the game.
+ */
+
 public class HighScoreHandler : MonoBehaviour {
 
     // Canvas/Panels

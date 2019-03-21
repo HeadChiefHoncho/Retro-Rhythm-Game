@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/**
+ * This class implements the pause menu during gameplay.
+ */
+
 public class PauseButtonHandler : MonoBehaviour {
 
     // Pause Menu Buttons
@@ -22,8 +26,8 @@ public class PauseButtonHandler : MonoBehaviour {
     public MultipleAudio[] audioSource;
     public AudioSource music;
 
+    // Misc
     public bool pause = false; // is game paused?
-    bool delayAudioSelected = false;
     public DelayAudio delayAudio;
     public ScoreGame scoreGame;
 
@@ -45,8 +49,6 @@ public class PauseButtonHandler : MonoBehaviour {
         resu.onClick.AddListener(ClosePause);
         rest.onClick.AddListener(StartGame);
         mm.onClick.AddListener(ExitGame);
-
-        delayAudioSelected = false;
     }
 
     void Update()
@@ -54,7 +56,6 @@ public class PauseButtonHandler : MonoBehaviour {
         if (!scoreGame.gameOver && multipleAudio.trackSelected && micInput.startedGame)// && !delayAudioSelected)
         {
             delayAudio = GameObject.Find("player").GetComponent<DelayAudio>();
-            delayAudioSelected = true;
         }
     }
 
@@ -63,7 +64,6 @@ public class PauseButtonHandler : MonoBehaviour {
     {
         // reset startedGame bool
         micInput.startedGame = false;
-        delayAudioSelected = false;
 
         // Reset tracks
         audioSource[0].trackSelected = false;
@@ -78,7 +78,6 @@ public class PauseButtonHandler : MonoBehaviour {
     {
         // Reset startedGame bool
         micInput.startedGame = false;
-        delayAudioSelected = false;
 
         // Reset tracks
         audioSource[0].trackSelected = false;

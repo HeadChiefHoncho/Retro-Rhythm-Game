@@ -3,26 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class does the final score calculations to determine whether
+ * a score is a new high score or not. It also keeps track of whether
+ * a game has ended or not! (a set delay time after the song has finished
+ * playing and the game is not paused)
+ */
+
 public class ScoreGame : MonoBehaviour {
 
-    public ScoreTally scoreTally;
+    // Game Objects
     public AudioSource audioSource;
-    private int score = 0;
-    private string scoreString;
     public Text lowScoreText;
     public Text highScoreText;
     public GameObject scorePanel;
     GameObject canvas;
-    PauseButtonHandler pauseButton;
-    float timeDone = float.MaxValue;
-    public float minTimeDone = 2f;
-    private MultipleAudio multipleAudio;
-    public bool gameOver = false;
     private GameObject player;
 
+    // Script Instances
+    public ScoreTally scoreTally;
+    PauseButtonHandler pauseButton;
+    private MultipleAudio multipleAudio;
 
-    // Use this for initialization
+    // Constans and Booleans
+    public float minTimeDone = 2f;
+    public bool gameOver = false;
+    private int score = 0;
+    private string scoreString;
+    private float timeDone = float.MaxValue;
+    
+
     void Start () {
+        // Game Object Setup
         canvas = GameObject.Find("Canvas");
         player = GameObject.Find("Player Container").transform.GetChild(0).gameObject;
 
@@ -31,12 +43,12 @@ public class ScoreGame : MonoBehaviour {
         audioSource = player.GetComponent<AudioSource>();
         scoreTally = GameObject.Find("Canvas/Score Panel/Score Text").GetComponent<ScoreTally>();
         
+        // Grab score text
         lowScoreText.text = getText(score);
         highScoreText.text = getText(score);
         
     }
 	
-	// Update is called once per frame
 	void Update () {
         // Grabs the time the song actually finishes
         if (!pauseButton.pause && !audioSource.isPlaying && timeDone == float.MaxValue)
@@ -54,7 +66,6 @@ public class ScoreGame : MonoBehaviour {
             Debug.Log("Display score panel");
             score = scoreTally.scoreValue;
             displayScore();
-            //pauseButton.pause = false;
             gameOver = true;
             player = GameObject.Find("Player Container").transform.GetChild(0).gameObject;
             player.SetActive(false);

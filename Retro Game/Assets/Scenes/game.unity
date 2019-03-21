@@ -343,7 +343,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2093831949
   m_SortingLayer: -3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c70e2b971a846da4f96459d405ee8ffe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -398,12 +398,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 22811291}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b1b0f9a9946a1449c57aae8250bbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: {x: -0.5, y: 0}
 --- !u!50 &22811296
 Rigidbody2D:
   serializedVersion: 4
@@ -436,7 +435,6 @@ GameObject:
   - component: {fileID: 125607484}
   - component: {fileID: 125607483}
   - component: {fileID: 125607482}
-  - component: {fileID: 125607488}
   - component: {fileID: 125607490}
   - component: {fileID: 125607491}
   - component: {fileID: 125607487}
@@ -464,10 +462,10 @@ MonoBehaviour:
   cooldown: 0.1
   controllerRange: 0.06
   activated: 0
+  startedGame: 0
   multipleAudio:
   - {fileID: 1776834956}
   - {fileID: 125607491}
-  startedGame: 0
   delayAudio: {fileID: 1776834951}
 --- !u!81 &125607483
 AudioListener:
@@ -556,17 +554,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: AudioProcessor+OnSpectrumEventHandler, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &125607488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 125607481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cf5198852571b4e9288a9f8537e312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &125607489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067f0044951267847acc0ca6c51430e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.9
   obstacleSpeed: {x: -4, y: 0}
   activated: 0
 --- !u!82 &125607490
@@ -2441,7 +2427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b1b0f9a9946a1449c57aae8250bbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: {x: -4, y: 0}
 --- !u!114 &981038460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2774,10 +2759,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af441229c6bf41c4ab780adcbb315eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retry: {fileID: 1800586377}
-  mainMenu: {fileID: 1128999099}
   lowScorePanel: {fileID: 806921534}
   canvas: {fileID: 1028393792}
+  retry: {fileID: 1800586377}
+  mainMenu: {fileID: 1128999099}
   micInput: {fileID: 125607482}
   audioSource:
   - {fileID: 1776834956}
@@ -3871,7 +3856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b1b0f9a9946a1449c57aae8250bbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: {x: -4, y: 0}
 --- !u!114 &1380464195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4451,7 +4435,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2093831949
   m_SortingLayer: -3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c70e2b971a846da4f96459d405ee8ffe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5324,7 +5308,6 @@ GameObject:
   - component: {fileID: 1776834949}
   - component: {fileID: 1776834948}
   - component: {fileID: 1776834950}
-  - component: {fileID: 1776834954}
   - component: {fileID: 1776834952}
   - component: {fileID: 1776834956}
   - component: {fileID: 1776834951}
@@ -5460,7 +5443,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 4
   delayDone: 0
-  micInput: {fileID: 125607482}
 --- !u!82 &1776834952
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5566,17 +5548,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.05, y: 10.05}
   m_EdgeRadius: 0
---- !u!114 &1776834954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1776834945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cf5198852571b4e9288a9f8537e312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1776834955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5588,11 +5559,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bf4eaf1afc70549a091f964e390861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTally: {fileID: 1083380388}
   audioSource: {fileID: 1776834952}
   lowScoreText: {fileID: 750223124}
   highScoreText: {fileID: 2103263325}
   scorePanel: {fileID: 806921534}
+  scoreTally: {fileID: 1083380388}
   minTimeDone: 2
   gameOver: 0
 --- !u!114 &1776834956
@@ -5889,7 +5860,7 @@ SpriteRenderer:
   m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 85f7f3d6efb9b1843ada324a0b83b311, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.516}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5904,7 +5875,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1832786418}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f59860b635079a4fb19059b7e4cb9e3, type: 3}
   m_Name: 
@@ -6870,12 +6841,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2072027895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b1b0f9a9946a1449c57aae8250bbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpeed: {x: -0.5, y: 0}
 --- !u!212 &2072027900
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6909,7 +6879,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2093831949
   m_SortingLayer: -3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c70e2b971a846da4f96459d405ee8ffe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class hides and shows the GUI (which includes the
+ * dotted line and player) when the audio is or is not playing.
+ */
+
 public class ShowAfterSongSelected : MonoBehaviour {
 
     private MultipleAudio audioSource;
@@ -9,7 +14,7 @@ public class ShowAfterSongSelected : MonoBehaviour {
     private SpriteRenderer spriteRender;
     ScoreGame scoreGame;
 
-    // Use this for initialization
+    // Init
     void Start () {
 
         playerContainer = GameObject.Find("Player Container");
@@ -20,10 +25,10 @@ public class ShowAfterSongSelected : MonoBehaviour {
         spriteRender.enabled = false;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (audioSource.trackSelected && !scoreGame.gameOver)
         {
+            spriteRender = GetComponent<SpriteRenderer>();
             spriteRender.enabled = true;
         }
     

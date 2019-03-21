@@ -2,27 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class holds data about which track has been selected to play.
+ * The actual selection logic is done in the SongSelectButtonHandler class.
+ */
+
 public class MultipleAudio : MonoBehaviour {
 
     public AudioClip[] tracks;
     public int trackSelector = 0;
     public bool trackSelected = false;
-    //private AudioSource audioSource;
     public MicInput micInput;
 
-	// Use this for initialization
-	void Start () {
-        //audioSource = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (trackSelected && !micInput.startedGame)
-        {
-            Debug.Log("Track selected!");
-            Debug.Log(trackSelector);
-            //GetComponent<AudioSource>().clip = tracks[trackSelector];
-            //GetComponent<AudioSource>().Play();
-        }
-	}
 }

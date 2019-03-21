@@ -2,21 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class takes the beat detection from the AudioProcessor
+ * class and handles them to generate beat obstacles based on
+ * a 50/50 ratio. It uses the const float cooldown to make sure
+ * that beats detected are not too close together.
+ */
+
 public class BeatHandler : MonoBehaviour {
 
-    
-    public float cooldown = 0.8f;
-    public Vector2 obstacleSpeed = new Vector2(-2, 0); // based on tiles on screen
+    // Public variables (mostly constants)
+    public const float cooldown = 0.8f;
+    public Vector2 obstacleSpeed = new Vector2(-4, 0); // based on tiles on screen
     public bool activated = false;
 
+    // Game Objects
     PauseButtonHandler pauseButton;
     GameObject above;
     GameObject below;
     GameObject aboveEnd;
     GameObject belowEnd;
+
+    // Obstacle Positions
     Vector3 aboveOrig;
     Vector3 belowOrig;
     
+    // Misc
     float lastBeat;
     bool needsBeat = true;
 
