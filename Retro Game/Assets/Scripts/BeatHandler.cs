@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class BeatHandler : MonoBehaviour {
 
+    
+    public float cooldown = 0.8f;
+    public Vector2 obstacleSpeed = new Vector2(-2, 0); // based on tiles on screen
     public bool activated = false;
+
+    PauseButtonHandler pauseButton;
     GameObject above;
     GameObject below;
     GameObject aboveEnd;
     GameObject belowEnd;
     Vector3 aboveOrig;
     Vector3 belowOrig;
-    public Vector2 obstacleSpeed = new Vector2(-2, 0); // based on tiles on screen
+    
     float lastBeat;
-    public float cooldown = 0.1f;
     bool needsBeat = true;
-    PauseButtonHandler pauseButton;
 
-    // Use this for initialization
     void Start () {
         pauseButton = GameObject.Find("Canvas").GetComponent<PauseButtonHandler>();
 
-        //Select the instance of AudioProcessor and pass a reference
-        //to this object
+        // Set up audio processor and listener
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
         processor.onBeat.AddListener(onOnbeatDetected);
         processor.onSpectrum.AddListener(onSpectrum);
@@ -39,22 +40,17 @@ public class BeatHandler : MonoBehaviour {
         aboveEnd.transform.position = new Vector3(-aboveOrig.x - 3, aboveOrig.y, 0);
         belowEnd.transform.position = new Vector3(-belowOrig.x - 3, belowOrig.y, 0);
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-    }
-
-    //this event will be called every time a beat is detected.
-    //Change the threshold parameter in the inspector
-    //to adjust the sensitivity
+    // Called every time a beat is detected
     void onOnbeatDetected()
     {
-        
+        // if we detect a beat but it has been too soon since last beat
         if (!needsBeat && ((Time.time - cooldown) >= lastBeat))
         {
             needsBeat = true;
         }
+
+        // if there hasn't been a beat in a bit, and we're not paused, find another beat
         if (needsBeat && !pauseButton.pause)
         {
             lastBeat = Time.time;
@@ -77,12 +73,9 @@ public class BeatHandler : MonoBehaviour {
         
     }
 
-    //This event will be called every frame while music is playing
+    // Called every frame while music is playing
     void onSpectrum(float[] spectrum)
     {
-        //The spectrum is logarithmically averaged
-        //to 12 bands
-
         for (int i = 0; i < spectrum.Length; ++i)
         {
             Vector3 start = new Vector3(i, 0, 0);

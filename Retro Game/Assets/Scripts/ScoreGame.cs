@@ -14,45 +14,80 @@ public class ScoreGame : MonoBehaviour {
     public GameObject scorePanel;
     GameObject canvas;
     PauseButtonHandler pauseButton;
-    float timeDone = 0f;
+    float timeDone = float.MaxValue;
     public float minTimeDone = 2f;
     private MultipleAudio multipleAudio;
+    public bool gameOver = false;
+    private GameObject player;
 
 
     // Use this for initialization
     void Start () {
-        multipleAudio = GameObject.Find("player").GetComponent<MultipleAudio>();
-        pauseButton = GameObject.Find("Canvas").GetComponent<PauseButtonHandler>();
-        audioSource = GameObject.Find("player").GetComponent<AudioSource>();
-        scoreTally = GameObject.Find("Canvas/Score Panel/Score Text").GetComponent<ScoreTally>();
         canvas = GameObject.Find("Canvas");
+        player = GameObject.Find("Player Container").transform.GetChild(0).gameObject;
+
+        multipleAudio = player.GetComponent<MultipleAudio>();
+        pauseButton = canvas.GetComponent<PauseButtonHandler>();
+        audioSource = player.GetComponent<AudioSource>();
+        scoreTally = GameObject.Find("Canvas/Score Panel/Score Text").GetComponent<ScoreTally>();
+        
         lowScoreText.text = getText(score);
         highScoreText.text = getText(score);
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!audioSource.isPlaying || !multipleAudio.trackSelected)
+        // Grabs the time the song actually finishes
+        if (!pauseButton.pause && !audioSource.isPlaying && timeDone == float.MaxValue)
         {
+            Debug.Log("Song finished!");
+            Debug.Log("audiosource is playing: " + audioSource.isPlaying);
+            Debug.Log("multiple audio track selected: " + multipleAudio.trackSelected);
             timeDone = Time.time;
+            gameOver = true;
         }
-        if (!audioSource.isPlaying && !pauseButton.pause && (Time.time - timeDone) >= minTimeDone)
+
+        // Score the game and display the score panel minTimeDone seconds after the song ends
+        if (gameOver && !audioSource.isPlaying && !pauseButton.pause && (Time.time - timeDone) >= minTimeDone)
         {
+            Debug.Log("Display score panel");
             score = scoreTally.scoreValue;
             displayScore();
+            //pauseButton.pause = false;
+            gameOver = true;
+            player = GameObject.Find("Player Container").transform.GetChild(0).gameObject;
+            player.SetActive(false);
+        }
+
+        if (gameOver)
+        {
             pauseButton.pause = false;
         }
 	}
 
     void displayScore()
     {
+
         scoreString = getText(score);
         lowScoreText.text = scoreString;
         highScoreText.text = scoreString;
 
-        // Grabs final score panel, not new high score
-        scorePanel = canvas.transform.GetChild(4).gameObject;
-        scorePanel.SetActive(true);
+        // a check should be performed here as to whether the score is a new low score, or a new high score.
+        bool newHighScore = checkScore();
+
+        if (!newHighScore)
+        {
+            // Grabs final score panel, not new high score
+            scorePanel = canvas.transform.GetChild(4).gameObject;
+            scorePanel.SetActive(true);
+        }
+        else
+        {
+            scorePanel = canvas.transform.GetChild(3).gameObject;
+            scorePanel.SetActive(true);
+        }
+
     }
 
     string getText(int score)
@@ -60,11 +95,19 @@ public class ScoreGame : MonoBehaviour {
         string scoreString = score.ToString();
         string scoreText = "";
 
+        // add spaces in between numbers of score to make font look better :/
         for (int i = 0; i < scoreString.Length; i++)
         {
             scoreText += (" " + scoreString[i]);
         }
 
         return scoreText.Substring(1);
+    }
+
+    bool checkScore()
+    {
+        // Returns true if score is a new high score.
+        // do loading to check score against 3rd highest score
+        return score >= PlayerPrefs.GetInt("high_score_int_3");
     }
 }

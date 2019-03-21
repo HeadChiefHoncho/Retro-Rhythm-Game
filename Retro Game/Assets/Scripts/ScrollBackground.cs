@@ -13,7 +13,6 @@ public class ScrollBackground : MonoBehaviour {
     GameObject newBackground;
     GameObject backgroundCollider;
 
-    // Use this for initialization
     void Start()
     {
         // Get origin position of background for copying
@@ -24,12 +23,6 @@ public class ScrollBackground : MonoBehaviour {
         nextBackgroundOrig = nextBackground.transform.position;
         background.GetComponent<Rigidbody2D>().velocity = obstacleSpeed;
         nextBackground.GetComponent<Rigidbody2D>().velocity = obstacleSpeed;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

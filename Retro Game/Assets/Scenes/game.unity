@@ -461,9 +461,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aboveTH: 0.35
   belowTH: 0.1
-  activated: 0
   cooldown: 0.1
   controllerRange: 0.06
+  activated: 0
   multipleAudio:
   - {fileID: 1776834956}
   - {fileID: 125607491}
@@ -578,9 +578,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067f0044951267847acc0ca6c51430e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 0
-  obstacleSpeed: {x: -4, y: 0}
   cooldown: 0.9
+  obstacleSpeed: {x: -4, y: 0}
+  activated: 0
 --- !u!82 &125607490
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1406,7 +1406,7 @@ RectTransform:
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 2047307004}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1611,7 +1611,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.39607847, g: 0.7843138, b: 0.81568635, a: 0}
+    m_NormalColor: {r: 0.39607847, g: 0.7843138, b: 0.81568635, a: 0.5}
     m_HighlightedColor: {r: 0.39607847, g: 0.7843138, b: 0.81568635, a: 1}
     m_PressedColor: {r: 1, g: 0.043137256, b: 0.43529412, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2128,7 +2128,7 @@ RectTransform:
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 2047307004}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2647,6 +2647,7 @@ GameObject:
   - component: {fileID: 1028393798}
   - component: {fileID: 1028393799}
   - component: {fileID: 1028393800}
+  - component: {fileID: 1028393801}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2753,13 +2754,15 @@ MonoBehaviour:
   mainMenu: {fileID: 1546867315}
   pausePanel: {fileID: 1238017793}
   canvas: {fileID: 1028393792}
-  pause: 0
   multipleAudio: {fileID: 125607491}
   micInput: {fileID: 125607482}
   audioSource:
   - {fileID: 125607491}
   - {fileID: 1776834956}
   music: {fileID: 1776834952}
+  pause: 0
+  delayAudio: {fileID: 1776834951}
+  scoreGame: {fileID: 1776834955}
 --- !u!114 &1028393798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2810,11 +2813,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b699cf3a759c74abd24ba1ffc02f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contin: {fileID: 1720742787}
   calibPanel: {fileID: 2047307003}
   songSelectPanel: {fileID: 1380912187}
   canvas: {fileID: 1028393792}
+  calibInst: {fileID: 1771042902}
+  avgInst: {fileID: 545504155}
+  countdown: {fileID: 642996449}
+  continInst: {fileID: 957459462}
+  countdownText: {fileID: 642996452}
+  calib: {fileID: 1720742785}
+  avg: {fileID: 1702846333}
+  done: {fileID: 485627352}
+  contin: {fileID: 1840583064}
+  calibrating: 0
   calibrationSet: 0
+--- !u!114 &1028393801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1028393792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86bfeb78d7f9c0b45a9812d9bea84132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScorePanel: {fileID: 903464008}
+  canvas: {fileID: 1028393792}
+  submitButton: {fileID: 773169164}
+  nameText: {fileID: 1701446582}
+  highScoreText: {fileID: 2103263325}
+  pauseButtonHandler: {fileID: 1028393797}
+  scoreTally: {fileID: 1083380388}
 --- !u!1 &1041508067
 GameObject:
   m_ObjectHideFlags: 0
@@ -4737,7 +4767,7 @@ RectTransform:
   m_Children:
   - {fileID: 1996792622}
   m_Father: {fileID: 2047307004}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4885,7 +4915,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3  Digit  Name
+  m_Text: name
 --- !u!222 &1712133948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5033,7 +5063,7 @@ RectTransform:
   m_Children:
   - {fileID: 299514906}
   m_Father: {fileID: 2047307004}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5564,6 +5594,7 @@ MonoBehaviour:
   highScoreText: {fileID: 2103263325}
   scorePanel: {fileID: 806921534}
   minTimeDone: 2
+  gameOver: 0
 --- !u!114 &1776834956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6695,7 +6726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2047307004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6709,10 +6740,10 @@ RectTransform:
   - {fileID: 1817998447}
   - {fileID: 1771042903}
   - {fileID: 545504156}
+  - {fileID: 642996450}
   - {fileID: 957459463}
   - {fileID: 1720742786}
   - {fileID: 1702846334}
-  - {fileID: 642996450}
   - {fileID: 485627353}
   - {fileID: 1840583065}
   m_Father: {fileID: 1028393796}

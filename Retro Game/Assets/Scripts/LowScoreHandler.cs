@@ -13,7 +13,6 @@ public class LowScoreHandler : MonoBehaviour {
     public MicInput micInput;
     public MultipleAudio[] audioSource;
 
-    // Use this for initialization
     void Start () {
         canvas = GameObject.Find("Canvas");
         lowScorePanel = canvas.transform.GetChild(4).gameObject;
@@ -25,11 +24,6 @@ public class LowScoreHandler : MonoBehaviour {
         mm.onClick.AddListener(ExitGame);
         ret.onClick.AddListener(StartGame);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void StartGame()
     {

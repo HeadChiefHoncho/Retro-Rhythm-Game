@@ -10,6 +10,7 @@ public class CheckScore : MonoBehaviour {
     Animator perfectAnimator;
     Animator goodAnimator;
     Animator badAnimator;
+    ScoreGame scoreGame;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class CheckScore : MonoBehaviour {
         perfectAnimator = GameObject.Find("perfect note").GetComponent<Animator>();
         goodAnimator = GameObject.Find("good note").GetComponent<Animator>();
         badAnimator = GameObject.Find("bad note").GetComponent<Animator>();
+        scoreGame = GameObject.Find("Player Container").transform.GetChild(0).GetComponent<ScoreGame>();
     }
 	
 	// Update is called once per frame
@@ -28,7 +30,7 @@ public class CheckScore : MonoBehaviour {
     {
         GameObject contactObject = collider.gameObject;
         bool hitBefore = contactObject.GetComponent<Hit>().hasBeenHit;
-        if (!hitBefore)
+        if (!hitBefore && !scoreGame.gameOver)
         {
             float distance = Mathf.Abs(transform.position.x - contactObject.transform.position.x);
             if (distance <= perfectRange)
